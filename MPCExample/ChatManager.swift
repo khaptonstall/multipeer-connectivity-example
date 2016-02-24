@@ -12,7 +12,7 @@ import MultipeerConnectivity
 protocol ChatServiceDelegate {
     
     func connectedDevicesChanged(manager : ChatManager, connectedDevices: [String])
-    func messageChanged(manager: ChatManager, message: String)
+    func messageChanged(manager: ChatManager, message: String, sender:String)
 }
 
 
@@ -24,31 +24,15 @@ class ChatManager : NSObject {
     
     private let serviceBrowser: MCNearbyServiceBrowser
     
+    private let myPeerId = MCPeerID(displayName: UIDevice.currentDevice().name)
+    private let serviceAdvertiser : MCNearbyServiceAdvertiser
     
     var delegate : ChatServiceDelegate?
     
-    
-    func sendPic(fromUrl url : String) {
-        NSLog("%@", "sendColor: \(url)")
-        
-        if session.connectedPeers.count > 0 {
-            var error : NSError?
-            let urlData = url.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-            do{
-                try self.session.sendData(urlData!, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
-            }
-            catch{
-                NSLog("%@", "\(error)")
-            }
-            
-        }
-        
-    }
-    
+ 
     
     func sendText(message : String) {
         NSLog("%@", "sendText: \(message)")
-        
         if session.connectedPeers.count > 0 {
             var error : NSError?
             let messageData = message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
@@ -63,11 +47,6 @@ class ChatManager : NSObject {
         
     }
     
-    
-    
-
-    
-    
     lazy var session : MCSession = {
         let session = MCSession(peer: self.myPeerId, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.Required)
         session.delegate = self
@@ -75,8 +54,7 @@ class ChatManager : NSObject {
     }()
     
     
-    private let myPeerId = MCPeerID(displayName: UIDevice.currentDevice().name)
-    private let serviceAdvertiser : MCNearbyServiceAdvertiser
+    
     
     override init() {
         self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: ChatServiceType)
@@ -150,7 +128,7 @@ extension ChatManager : MCSessionDelegate {
     func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
         NSLog("%@", "didReceiveData: \(data)")
         let str = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
-        self.delegate?.messageChanged(self, message: str)
+        self.delegate?.messageChanged(self, message: str, sender: peerID.displayName)
     }
     
     func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

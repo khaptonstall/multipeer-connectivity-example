@@ -13,6 +13,7 @@
 		294CA3C61C7D3A840010DDDE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 294CA3C41C7D3A840010DDDE /* LaunchScreen.storyboard */; };
 		294CA3D31C7E211D0010DDDE /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294CA3D21C7E211D0010DDDE /* ChatManager.swift */; };
 		294CA3D51C7E21260010DDDE /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294CA3D41C7E21260010DDDE /* ChatViewController.swift */; };
+		294CA3D71C7E3F1A0010DDDE /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294CA3D61C7E3F1A0010DDDE /* ChatCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		294CA3C71C7D3A840010DDDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		294CA3D21C7E211D0010DDDE /* ChatManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
 		294CA3D41C7E21260010DDDE /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		294CA3D61C7E3F1A0010DDDE /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				294CA3BB1C7D3A840010DDDE /* AppDelegate.swift */,
+				294CA3D61C7E3F1A0010DDDE /* ChatCell.swift */,
 				294CA3D21C7E211D0010DDDE /* ChatManager.swift */,
 				294CA3D41C7E21260010DDDE /* ChatViewController.swift */,
 				294CA3BF1C7D3A840010DDDE /* Main.storyboard */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				294CA3BC1C7D3A840010DDDE /* AppDelegate.swift in Sources */,
+				294CA3D71C7E3F1A0010DDDE /* ChatCell.swift in Sources */,
 				294CA3D51C7E21260010DDDE /* ChatViewController.swift in Sources */,
 				294CA3D31C7E211D0010DDDE /* ChatManager.swift in Sources */,
 			);
