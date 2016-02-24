@@ -11,8 +11,8 @@
 		294CA3C11C7D3A840010DDDE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 294CA3BF1C7D3A840010DDDE /* Main.storyboard */; };
 		294CA3C31C7D3A840010DDDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 294CA3C21C7D3A840010DDDE /* Assets.xcassets */; };
 		294CA3C61C7D3A840010DDDE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 294CA3C41C7D3A840010DDDE /* LaunchScreen.storyboard */; };
-		294CA3CE1C7D3A9D0010DDDE /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294CA3CD1C7D3A9D0010DDDE /* ColorManager.swift */; };
-		294CA3D01C7D3B0F0010DDDE /* ColorSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294CA3CF1C7D3B0F0010DDDE /* ColorSwitchViewController.swift */; };
+		294CA3D31C7E211D0010DDDE /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294CA3D21C7E211D0010DDDE /* ChatManager.swift */; };
+		294CA3D51C7E21260010DDDE /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294CA3D41C7E21260010DDDE /* ChatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,8 +22,8 @@
 		294CA3C21C7D3A840010DDDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		294CA3C51C7D3A840010DDDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		294CA3C71C7D3A840010DDDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		294CA3CD1C7D3A9D0010DDDE /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
-		294CA3CF1C7D3B0F0010DDDE /* ColorSwitchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSwitchViewController.swift; sourceTree = "<group>"; };
+		294CA3D21C7E211D0010DDDE /* ChatManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
+		294CA3D41C7E21260010DDDE /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +57,8 @@
 			isa = PBXGroup;
 			children = (
 				294CA3BB1C7D3A840010DDDE /* AppDelegate.swift */,
-				294CA3CD1C7D3A9D0010DDDE /* ColorManager.swift */,
-				294CA3CF1C7D3B0F0010DDDE /* ColorSwitchViewController.swift */,
+				294CA3D21C7E211D0010DDDE /* ChatManager.swift */,
+				294CA3D41C7E21260010DDDE /* ChatViewController.swift */,
 				294CA3BF1C7D3A840010DDDE /* Main.storyboard */,
 				294CA3C21C7D3A840010DDDE /* Assets.xcassets */,
 				294CA3C41C7D3A840010DDDE /* LaunchScreen.storyboard */,
@@ -138,9 +138,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				294CA3CE1C7D3A9D0010DDDE /* ColorManager.swift in Sources */,
-				294CA3D01C7D3B0F0010DDDE /* ColorSwitchViewController.swift in Sources */,
 				294CA3BC1C7D3A840010DDDE /* AppDelegate.swift in Sources */,
+				294CA3D51C7E21260010DDDE /* ChatViewController.swift in Sources */,
+				294CA3D31C7E211D0010DDDE /* ChatManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
