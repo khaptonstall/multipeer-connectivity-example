@@ -15,6 +15,14 @@ class ColorSwitchViewController: UIViewController{
     let colorService = ColorManager()
     @IBOutlet weak var connectionLabel: UILabel!
     
+    @IBOutlet weak var urlField: UITextField!
+    
+    @IBAction func onSendUrl(sender: AnyObject) {
+        if urlField.text != nil{
+            colorService.sendPic(fromUrl: urlField.text!)
+        }
+    }
+    
     
     @IBAction func onRed(sender: AnyObject) {
         self.changeColor(UIColor.redColor())

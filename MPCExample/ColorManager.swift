@@ -27,6 +27,26 @@ class ColorManager : NSObject {
     
     var delegate : ColorServiceDelegate?
     
+    
+    func sendPic(fromUrl url : String) {
+        NSLog("%@", "sendColor: \(url)")
+        
+        if session.connectedPeers.count > 0 {
+            var error : NSError?
+            let urlData = url.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+            do{
+                try self.session.sendData(urlData!, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
+            }
+            catch{
+                NSLog("%@", "\(error)")
+            }
+            
+        }
+        
+    }
+
+    
+    
     func sendColor(colorName : String) {
         NSLog("%@", "sendColor: \(colorName)")
         
