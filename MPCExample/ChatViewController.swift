@@ -26,11 +26,22 @@ class ChatViewController: UIViewController, UITextFieldDelegate, UITableViewDele
     
     
     @IBAction func onSendMessage(sender: AnyObject) {
-        if messageTextField.text != nil{
-            chatService.sendText(messageTextField.text!)
-            let messageData:[String:String] = ["Sender": "You", "Message": messageTextField.text!]
+        if messageTextField.text != nil && messageTextField.text != ""{
+            
+            // Grab message and clear text field
+            let messageText = messageTextField.text!
+            messageTextField.text = ""
+            
+            // Send the message out
+            chatService.sendText(messageText)
+            
+            // Add message to tableView
+            let messageData:[String:String] = ["Sender": "You", "Message": messageText]
             messages.append(messageData)
             tableView.reloadData()
+
+            // Scroll to bottom of messages
+            scrollToNewMessage()
         }
     }
     
@@ -46,19 +57,20 @@ class ChatViewController: UIViewController, UITextFieldDelegate, UITableViewDele
         // Set up keyboard dismissal
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
+        
+        if messages.count > 1{
+            scrollToNewMessage()
+
+        }
 
     }
     
-    func changeColor(color : UIColor) {
-        UIView.animateWithDuration(0.2) {
-            self.view.backgroundColor = color
-        }
-    }
     
     // MARK: TableView Methods
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
     }
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ChatCell") as! ChatCell
@@ -69,6 +81,10 @@ class ChatViewController: UIViewController, UITextFieldDelegate, UITableViewDele
             cell.sender.textAlignment = NSTextAlignment.Right
             cell.message.textAlignment = NSTextAlignment.Right
         }
+        else{
+            cell.sender.textAlignment = NSTextAlignment.Left
+            cell.message.textAlignment = NSTextAlignment.Left
+        }
         cell.sender.text = sender
         cell.message.text = messageData["Message"]
         return cell
@@ -76,6 +92,13 @@ class ChatViewController: UIViewController, UITextFieldDelegate, UITableViewDele
     
     func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    func scrollToNewMessage(){
+        tableView.scrollToRowAtIndexPath(
+            NSIndexPath(forRow: self.messages.count - 1, inSection: 0),
+            atScrollPosition: UITableViewScrollPosition.Bottom,
+            animated: true)
     }
     
 
@@ -90,11 +113,12 @@ extension ChatViewController : ChatServiceDelegate {
         }
     }
     
-    func messageChanged(manager: ChatManager, message: String, sender: String){
+    func messageReceived(manager: ChatManager, message: String, sender: String){
         NSOperationQueue.mainQueue().addOperationWithBlock {
             let messageData:[String:String] = ["Sender": sender, "Message": message]
             self.messages.append(messageData)
             self.tableView.reloadData()
+            self.scrollToNewMessage()
         }
     }
     

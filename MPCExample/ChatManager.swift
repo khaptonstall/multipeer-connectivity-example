@@ -12,7 +12,7 @@ import MultipeerConnectivity
 protocol ChatServiceDelegate {
     
     func connectedDevicesChanged(manager : ChatManager, connectedDevices: [String])
-    func messageChanged(manager: ChatManager, message: String, sender:String)
+    func messageReceived(manager: ChatManager, message: String, sender:String)
 }
 
 
@@ -20,7 +20,7 @@ class ChatManager : NSObject {
     
     // Service type must be a unique string, at most 15 characters long
     // and can contain only ASCII lowercase letters, numbers and hyphens.
-    private let ChatServiceType = "example-color"
+    private let ChatServiceType = "chat-service"
     
     private let serviceBrowser: MCNearbyServiceBrowser
     
@@ -32,15 +32,13 @@ class ChatManager : NSObject {
  
     
     func sendText(message : String) {
-        NSLog("%@", "sendText: \(message)")
         if session.connectedPeers.count > 0 {
-            var error : NSError?
             let messageData = message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
             do{
                 try self.session.sendData(messageData!, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
             }
-            catch{
-                NSLog("%@", "\(error)")
+            catch _{
+                print("error")
             }
             
         }
@@ -64,6 +62,7 @@ class ChatManager : NSObject {
         self.serviceBrowser.startBrowsingForPeers()
         self.serviceAdvertiser.delegate = self
         self.serviceAdvertiser.startAdvertisingPeer()
+        
     }
     
     deinit {
@@ -111,7 +110,6 @@ extension MCSessionState {
         case .NotConnected: return "NotConnected"
         case .Connecting: return "Connecting"
         case .Connected: return "Connected"
-        default: return "Unknown"
         }
     }
     
@@ -128,7 +126,7 @@ extension ChatManager : MCSessionDelegate {
     func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
         NSLog("%@", "didReceiveData: \(data)")
         let str = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
-        self.delegate?.messageChanged(self, message: str, sender: peerID.displayName)
+        self.delegate?.messageReceived(self, message: str, sender: peerID.displayName)
     }
     
     func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
